@@ -1,12 +1,20 @@
 require 'test_helper'
 
 class RecipeTest < ActiveSupport::TestCase
-  def setup
-    @recipe = Recipe.new(name: "chicken parm", summary: "this is so good", description:"heat oil, onions, add chicken, add tomatoes, stew for 20 min")
-  end
+ 
+   def setup
+    @chef = Chef.create(chefname: "bob", email: "kir@example.com")
+    @recipe = @chef.recipes.build(name: "chicken parm", summary: "this is so good", 
+    description:"heat oil, onions, add chicken, add tomatoes, stew for 20 min")
+   end
   
   test "recipe should be valid" do 
     assert @recipe.valid?
+  end
+  
+  test "chef_id should be present" do
+    @recipe.chef_id = nil
+    assert_not @recipe.valid?
   end
   
   test "name should be present" do
@@ -19,7 +27,6 @@ class RecipeTest < ActiveSupport::TestCase
   assert_not @recipe.valid?
   end
   
-  
   test "name length should not be too short" do
     @recipe.name = "aaaa" 
     assert_not @recipe.valid?
@@ -31,13 +38,13 @@ class RecipeTest < ActiveSupport::TestCase
   end
     
   test "summary length should not be too long" do
-     @recipe.summary = "a" * 151
-  assert_not @recipe.valid?
+    @recipe.summary = "a" * 151
+    assert_not @recipe.valid?
   end
   
   test "summary length should not be too short" do
-      @recipe.summary = "a" * 9
-  assert_not @recipe.valid?
+    @recipe.summary = "a" * 9
+    assert_not @recipe.valid?
   end
   
   test "description should be present" do
@@ -52,6 +59,7 @@ class RecipeTest < ActiveSupport::TestCase
    
   test "description length should not be too short" do
       @recipe.description = "a" * 19
-  assert_not @recipe.valid?
+    assert_not @recipe.valid?
   end
+
 end
