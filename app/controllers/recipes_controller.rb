@@ -22,26 +22,29 @@ class RecipesController < ApplicationController
          render :new
      end
          
-  
     end
-    
     
     def edit
         @recipe = Recipe.find(params[:id])
     end
 
     def update
-         @recipe = Recipe.find(params[:id])
-         if @recipe.update(recipe_params)
-              flash[:success] = "Your recipe was update successfully!"
-              redirect_to recipes_path(@recipe)
-             else
-                 render :edit
-             end
-         
-         
+        @recipe = Recipe.find(params[:id])
+        if @recipe.update(recipe_params)
+            #do something
+            flash[:success] = "Your recipe was update successfully!"
+            redirect_to recipes_path(@recipe)
+        else
+            render :edit
+        end
     end
     
+    def like
+        @recipe = Recipe.find(params[:id])
+        Like.create(like: params[:like], chef: Chef.first, recipe: @recipe)
+        flash[:success] = "Your selection was successful!"
+        redirect_to :back
+    end
     private
         def recipe_params
         params.require(:recipe).permit(:name, :summary, :description, :picture)
