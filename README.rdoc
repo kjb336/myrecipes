@@ -1,28 +1,16 @@
-== README
+Chefs:
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+What I have already done
+- Chef model and validations
+- chef table with columns chefname and email
 
-Things you may want to cover:
+What I need to do:
+- add passwords to chefs table so that chefs can be authenticated and logged in
+- use email as log in credentials, since email is unique
+- Abilty to register new Chefs to use app
+- Abilty to display chefs to use the app
+- Abilty to list chefs using the app
+- Abilty for chefs to log in and logout of the app
+- restrict actions to logged in chefs only
+- Restricting edit of recipes by chefs who created the recipes
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
